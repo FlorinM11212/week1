@@ -18,7 +18,12 @@ class TestCart(unittest.TestCase):
         self.assertEqual(len(self.cart.items), 0)
 
     def test_cart_total(self):
-        self.assertEqual(self.cart.p(self.cart.items), 10)
+        self.assertEqual(self.cart.calculate_total(), 10)
+
+    def test_log_counter_tracks_operations(self):
+        # setUp already added one item (1 operation); removing makes it 2.
+        self.cart.remove_item({"name": "Pizza", "price": 10})
+        self.assertEqual(self.cart.operation_count(), 2)
 
 
 if __name__ == "__main__":
